@@ -4,7 +4,7 @@
 ## users テーブル
 
 | Column             | Type   | Options                   |
- | ------------------ | -------| -------------------------|
+| ------------------ | -------| ------------------------- |
 | nickname           | string | null: false               |
 | email              | string | null: false, unique: true |
 | encrypted_password | string | null: false               |
@@ -32,25 +32,20 @@
 | shipping_fee_id | integer    | null: false                    |
 | prefecture_id   | integer    | null: false                    |
 | delivery_id     | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_one    :order
-- has_one    :category
-- has_one    :item_status
-- has_one    :shipping_fee
-- has_one    :prefecture
-- has_one    :delivery
 
 
 ## orders テーブル
 
-| Column      | Type       | Options                        |
-| ------------| ---------- | ------------------------------ |
-| user_id     | references | null: false, foreign_key: true |
-| item_id     | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| -------| ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -68,9 +63,8 @@
 | building      | string     |                                |
 | phone_number  | string     | null: false                    |
 | prefecture_id | integer    | null: false                    |
-| order_id      | references | null: false, foreign_key: true |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :order
-- has_one    :prefecture
