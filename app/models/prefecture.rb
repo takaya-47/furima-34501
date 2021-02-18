@@ -14,7 +14,11 @@ class Prefecture < ActiveHash::Base
     {id: 33, name: '岡山県'}, {id: 34, name: '広島県'}, {id: 35, name: '山口県'},
     {id: 36, name: '徳島県'}, {id: 37, name: '香川県'}, {id: 38, name: '愛媛県'},
     {id: 39, name: '高知県'}, {id: 40, name: '福岡県'}, {id: 41, name: '佐賀県'},
-    {id: 42, name: '長崎県'}, {id: 43, name: '熊本県'}, {id: 44, name: '大分県'}, 
+    {id: 42, name: '長崎県'}, {id: 43, name: '熊本県'}, {id: 44, name: '大分県'},
     {id: 45, name: '宮崎県'}, {id: 46, name: '鹿児島県'}, {id: 47, name: '沖縄県'}
   ]
+
+  # Itemクラスとのアソシエーション定義のためにmoduleを取り込む
+  include ActiveHash::Associations
+  has_many :items
 end

@@ -12,4 +12,8 @@ class Category < ActiveHash::Base
     {id: 10, name: "ハンドメイド"},
     {id: 11, name: "その他"}
   ]
+
+  # Itemクラスとのアソシエーション定義のためにmoduleを取り込む
+  include ActiveHash::Associations
+  has_many :items
 end
