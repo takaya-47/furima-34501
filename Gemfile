@@ -35,6 +35,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'faker'
+  # 日本語対応のダミーデータを生成するgem
+  gem 'gimei'
 end
 
 group :development do
