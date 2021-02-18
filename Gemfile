@@ -65,3 +65,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 # デバッグ用のgem
 gem 'pry-rails'
+# ActiveHashを導入
+gem 'active_hash'
