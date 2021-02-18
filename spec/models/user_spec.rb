@@ -19,6 +19,26 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
 
+      it 'emailが空では登録できない' do
+        @user.email = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
+      end
+
+      it '重複したemailは登録できない' do
+        @user.save
+        @other_user = FactoryBot.build(:user)
+        @other_user.email = @user.email
+        @other_user.valid?
+        expect(@other_user.errors.full_messages).to include("Email has already been taken")
+      end
+
+      it 'emailに@が含まれていないと登録できない' do
+        @user.email = 'test.com'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
+
       it 'passwordが空では登録できない' do
         @user.password = nil
         @user.valid?
