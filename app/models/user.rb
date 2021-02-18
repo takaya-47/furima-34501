@@ -1,7 +1,6 @@
 class User < ApplicationRecord
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
 
   # email (default)必須、一意性、@を含む
   # password (default)必須、６文字以上、確認用と一致
@@ -10,11 +9,15 @@ class User < ApplicationRecord
   with_options presence: true do
     validates :nickname
     NAME_REGEX = /\A[ぁ-んァ-ヶ一-龥々]+\z/
-    validates :last_name, format: { with: NAME_REGEX, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
-    validates :first_name, format: { with: NAME_REGEX, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' }
+    with_options format: { with: NAME_REGEX, message: 'は全角（漢字・ひらがな・カタカナ）で入力してください' } do
+      validates :last_name
+      validates :first_name
+    end
     NAME_KANA_REGEX = /\A[ァ-ヶ]+\z/
-    validates :last_name_kana, format: { with: NAME_KANA_REGEX, message: 'は全角カタカナで入力してください' }
-    validates :first_name_kana, format: {with: NAME_KANA_REGEX, message: 'は全角カタカナで入力してください' }
+    with_options format: { with: NAME_KANA_REGEX, message: 'は全角カタカナで入力してください' } do
+      validates :last_name_kana
+      validates :first_name_kana
+    end
     validates :birthday
   end
 
