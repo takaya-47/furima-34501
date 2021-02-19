@@ -13,16 +13,18 @@ class Item < ApplicationRecord
   belongs_to :delivery
 
   with_options presence: true do
+    validates :image
     validates :name
     validates :explain
-    validates :price
+    validates :price, format: { with: /\A[0-9]+\z/, message: "Half-width number" },
+                      numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "Out of setting range" }
+    with_options numericality: { other_than: 0, message: "Select" } do
+      validates :category_id
+      validates :item_status_id
+      validates :shipping_fee_id
+      validates :prefecture_id
+      validates :delivery_id
+    end
   end
-  with_options numericality: { other_than: 0 } do
-    # numericalityはpresence: trueの意味も含む
-    :category_id
-    :item_status_id
-    :shipping_fee_id
-    :prefecture_id
-    :delivery_id
-  end
+
 end
