@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   # モデルとのアソシエーション
   belongs_to :user
+  # 画像を１枚添付できる
+  has_one_attached :image
 
   # ActiveHashクラスとのアソシエーション定義のためにmoduleを取り込む
   extend ActiveHash::Associations::ActiveRecordExtensions
