@@ -1,10 +1,11 @@
 class User < ApplicationRecord
+  has_many :items
 
-  devise :database_authenticatable, :registerable,:recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   # email (default)必須、一意性、@を含む
   # password (default)必須、６文字以上、確認用と一致
-  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+  PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates_format_of :password, with: PASSWORD_REGEX, message: 'は半角英数字を含めて入力してください'
   with_options presence: true do
     validates :nickname
@@ -20,5 +21,4 @@ class User < ApplicationRecord
     end
     validates :birthday
   end
-
 end

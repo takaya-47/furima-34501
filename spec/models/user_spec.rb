@@ -30,13 +30,13 @@ RSpec.describe User, type: :model do
         @other_user = FactoryBot.build(:user)
         @other_user.email = @user.email
         @other_user.valid?
-        expect(@other_user.errors.full_messages).to include("Email has already been taken")
+        expect(@other_user.errors.full_messages).to include('Email has already been taken')
       end
 
       it 'emailに@が含まれていないと登録できない' do
         @user.email = 'test.com'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
 
       it 'passwordが空では登録できない' do
@@ -61,19 +61,19 @@ RSpec.describe User, type: :model do
       end
 
       it 'passwordは半角英語だけでは登録できない' do
-        password = "password"
+        password = 'password'
         @user.password = password
         @user.password_confirmation = password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数字を含めて入力してください")
+        expect(@user.errors.full_messages).to include('Password は半角英数字を含めて入力してください')
       end
 
       it 'passwordは半角数字だけでは登録できない' do
-        password = "123456"
+        password = '123456'
         @user.password = password
         @user.password_confirmation = password
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password は半角英数字を含めて入力してください")
+        expect(@user.errors.full_messages).to include('Password は半角英数字を含めて入力してください')
       end
 
       it 'last_nameが空では登録できない' do
@@ -129,7 +129,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
-
     end
   end
 end
