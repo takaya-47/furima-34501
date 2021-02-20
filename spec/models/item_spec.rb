@@ -43,13 +43,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it '商品価格が半角英数字混合では出品できない' do
+      it 'priceが半角英数字混合では出品できない' do
         @item.price = '1000yen'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it '商品価格が半角英字のみでは出品できない' do
+      it 'priceが半角英字のみでは出品できない' do
         @item.price = 'price'
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
