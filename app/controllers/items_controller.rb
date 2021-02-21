@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(prams[:id])
+    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
