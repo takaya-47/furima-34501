@@ -18,6 +18,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+    # ルーティングに含まれるid情報を使って表示するitemを特定する
+    @item = Item.find(params[:id])
+  end
+
   private
 
   def item_params
