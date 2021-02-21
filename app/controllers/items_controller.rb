@@ -50,9 +50,6 @@ class ItemsController < ApplicationController
     # URLから変数itemのidを取得する
     item = Item.find(params[:id])
     # ログイン中のユーザーのidと、遷移しようとしている商品ページの商品を出品したユーザーのidが一致しなければトップページへ強制的に遷移させる。
-    if current_user.id != item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != item.user.id
   end
-
 end
