@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   # ログインが必要なアクション
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  # 編集は自身が出品した商品しか行えないため、アクセス制限をかける
-  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  # 編集や削除は自身が出品した商品のみ行える。
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: 'DESC').includes(:user)
@@ -37,6 +37,11 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path
+  end
+
   private
 
   def item_params
@@ -45,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def ensure_correct_user
-    # URLから変数itemのidを取得する
+    # ルーティングから変数itemのidを取得する
     @item = Item.find(params[:id])
     # ログイン中のユーザーのidと、遷移しようとしている商品ページの商品を出品したユーザーのidが一致しなければトップページへ強制的に遷移させる。
     redirect_to root_path if current_user.id != @item.user.id
