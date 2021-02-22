@@ -27,11 +27,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item)
     else
@@ -48,8 +46,8 @@ class ItemsController < ApplicationController
 
   def ensure_correct_user
     # URLから変数itemのidを取得する
-    item = Item.find(params[:id])
+    @item = Item.find(params[:id])
     # ログイン中のユーザーのidと、遷移しようとしている商品ページの商品を出品したユーザーのidが一致しなければトップページへ強制的に遷移させる。
-    redirect_to root_path if current_user.id != item.user.id
+    redirect_to root_path if current_user.id != @item.user.id
   end
 end
