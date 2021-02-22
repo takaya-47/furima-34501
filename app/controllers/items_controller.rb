@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   # ログインが必要なアクション
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   # 編集は自身が出品した商品しか行えないため、アクセス制限をかける
   before_action :ensure_correct_user, only: [:edit, :update]
 
