@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   # モデルとのアソシエーション
   belongs_to :user
+  has_one :order
   # 画像を１枚添付できる
   has_one_attached :image
 
