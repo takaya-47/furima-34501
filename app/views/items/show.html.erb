@@ -23,18 +23,19 @@
       </span>
     </div>
 
-    <%# ログインしている場合は商品の編集と削除ができる %>
-    <% if user_signed_in? && current_user.id == @item.user.id %>
+    <%# ユーザーがログインしている場合 %>
+    <% if user_signed_in? %>
+    <%# ユーザーがログインしており、さらに出品者である場合 %>
+    <% if current_user.id == @item.user.id %>
     <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
     <p class="or-text">or</p>
     <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
-    <% end %>
-
-    <%# ログインしないと購入できない %>
-    <% if user_signed_in? %>
+    <% else %>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
     <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
+    <% end %>
+
     <% end %>
 
     <div class="item-explain-box">
