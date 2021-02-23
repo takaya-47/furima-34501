@@ -14,6 +14,7 @@ class OrderShipping
     # フォームオブジェクトクラスではアソシエーションを定義できないため、Orderモデルのbelongs_toと同じバリデーションが必要
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   # フォームオブジェクトクラスはActiveRecordを継承していないのでsaveメソッドを自分で記述する必要がある。
