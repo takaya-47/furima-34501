@@ -25,6 +25,8 @@
       </span>
     </div>
 
+    <%# 売却済みの商品は商品の編集・削除・購入ができないのでボタンが表示されない %>
+    <% unless @item.order.present? %>
     <%# ユーザーがログインしている場合 %>
     <% if user_signed_in? %>
     <%# ユーザーがログインしており、さらに出品者である場合 %>
@@ -37,7 +39,7 @@
     <%= link_to "購入画面に進む", item_orders_path(@item) ,class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
     <% end %>
-
+    <% end %>
     <% end %>
 
     <div class="item-explain-box">
