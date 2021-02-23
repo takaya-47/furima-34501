@@ -1,14 +1,14 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :ensure_correct_user
 
   def index
     # ルーティングのparamsから商品のidを取得している
-    @item = Item.find(params[:item_id])
     # form_withに渡す、フォームオブジェクトの空のインスタンスを生成
     @ordershipping = OrderShipping.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @ordershipping = OrderShipping.new(ordershipping_params)
     # フォームオブジェクトクラスはActiveRecordを継承していないのでvalid?を実行してバリデーションを実行する必要がある。
     if @ordershipping.valid?
@@ -34,6 +34,12 @@ class OrdersController < ApplicationController
       :card => ordershipping_params[:token],
       :currency => 'jpy',
     )
-    end
+  end
+
+  def ensure_correct_user
+    @item = Item.find(params[:item_id])
+    # 自身の出品した商品の購入ページへは遷移できない
+    redirect_to root_path if current_user.id == @item.user.id
+  end
 
 end
