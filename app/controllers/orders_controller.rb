@@ -3,7 +3,6 @@ class OrdersController < ApplicationController
   before_action :ensure_correct_user
 
   def index
-    # ルーティングのparamsから商品のidを取得している
     # form_withに渡す、フォームオブジェクトの空のインスタンスを生成
     @ordershipping = OrderShipping.new
   end
