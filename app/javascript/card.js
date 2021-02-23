@@ -1,6 +1,6 @@
 const pay = () => {
   // 公開鍵は後で環境変数に設定する。
-  Payjp.setPublicKey('pk_test_e6ba193b9af5d556894a2f6f');
+  Payjp.setPublicKey(process.env.PAYJP_PUBLIC_KEY);
   const form = document.getElementById('charge-form');
   form.addEventListener('submit', (e) => {
     e.preventDefault();
