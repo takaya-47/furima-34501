@@ -10,12 +10,12 @@ class OrderShipping
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A[0-9]{10,11}\z/}
-    validates :prefecture_id, numericality: { other_than: 0, message: 'Select' }
     # フォームオブジェクトクラスではアソシエーションを定義できないため、Orderモデルのbelongs_toと同じバリデーションが必要
     validates :user_id
     validates :item_id
     validates :token
   end
+  validates :prefecture_id, numericality: { other_than: 0, message: 'Select' }
 
   # フォームオブジェクトクラスはActiveRecordを継承していないのでsaveメソッドを自分で記述する必要がある。
   def save
