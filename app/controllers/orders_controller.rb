@@ -39,14 +39,18 @@ class OrdersController < ApplicationController
     )
   end
 
-  def ensure_correct_user
+  def find_item
     @item = Item.find(params[:item_id])
+  end
+
+  def ensure_correct_user
+    find_item
     # 自身の出品した商品の購入ページへは遷移できない
     redirect_to root_path if current_user.id == @item.user.id
   end
 
   def cannot_buy_soldout_item
-    @item = Item.find(params[:item_id])
+    find_item
     redirect_to root_path if @item.order.present?
   end
 end
