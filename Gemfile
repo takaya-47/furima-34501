@@ -70,3 +70,5 @@ gem 'pry-rails'
 gem 'active_hash'
 # rubyのサーバーサイドから決済処理を行うためのgem
 gem 'payjp'
+# AWSのS3を利用するためのgem
+gem "aws-sdk-s3", require: false
