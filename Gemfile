@@ -68,3 +68,5 @@ gem 'devise'
 gem 'pry-rails'
 # ActiveHashを導入
 gem 'active_hash'
+# rubyのサーバーサイドから決済処理を行うためのgem
+gem 'payjp'

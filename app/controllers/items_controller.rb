@@ -1,8 +1,10 @@
 class ItemsController < ApplicationController
   # ログインが必要なアクション
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  # 編集や削除は自身が出品した商品のみ行える。
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  # 商品を特定するためのメソッド
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  # 編集や削除は自身が出品した商品で、かつまだ売れていない商品のみ行える。
+  before_action :ensure_correct_access, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: 'DESC').includes(:user)
@@ -22,8 +24,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # ルーティングに含まれるid情報を使って表示するitemを特定する
-    @item = Item.find(params[:id])
   end
 
   def edit
@@ -49,10 +49,12 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :delivery_id).merge(user_id: current_user.id)
   end
 
-  def ensure_correct_user
-    # ルーティングから変数itemのidを取得する
+  def find_item
+    # ルーティングから商品のidを特定
     @item = Item.find(params[:id])
-    # ログイン中のユーザーのidと、遷移しようとしている商品ページの商品を出品したユーザーのidが一致しなければトップページへ強制的に遷移させる。
-    redirect_to root_path if current_user.id != @item.user.id
+  end
+
+  def ensure_correct_access
+    redirect_to root_path if current_user.id != @item.user.id || @item.order.present?
   end
 end
