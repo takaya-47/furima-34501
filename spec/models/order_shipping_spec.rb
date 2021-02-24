@@ -20,7 +20,6 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.phone_number = '0123456789'
         expect(@order_shipping).to be_valid
       end
-
     end
 
     context '商品の購入ができない時' do
@@ -33,13 +32,13 @@ RSpec.describe OrderShipping, type: :model do
       it 'postal_codeはハイフンが必要' do
         @order_shipping.postal_code = '1234567'
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Postal code is invalid")
+        expect(@order_shipping.errors.full_messages).to include('Postal code is invalid')
       end
 
       it 'prefecture_idを選択しなければ購入できない' do
         @order_shipping.prefecture_id = 0
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("Prefecture Select")
+        expect(@order_shipping.errors.full_messages).to include('Prefecture Select')
       end
 
       it 'cityがなければ購入できない' do
@@ -65,9 +64,6 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Token can't be blank")
       end
-
     end
   end
-
-
 end
