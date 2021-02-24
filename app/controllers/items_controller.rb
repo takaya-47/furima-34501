@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   # ログインが必要なアクション
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  # 商品を特定するためのメソッド
+  before_action :find_item, only: [:show, :edit, :update, :destroy]
   # 編集や削除は自身が出品した商品で、かつまだ売れていない商品のみ行える。
   before_action :ensure_correct_access, only: [:edit, :update, :destroy]
 
@@ -22,8 +24,6 @@ class ItemsController < ApplicationController
   end
 
   def show
-    # ルーティングに含まれるid情報を使って表示するitemを特定する
-    @item = Item.find(params[:id])
   end
 
   def edit
@@ -46,11 +46,15 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:image, :name, :explain, :price, :category_id, :item_status_id, :shipping_fee_id,
-                                 :prefecture_id, :delivery_id).merge(user_id: current_user.id)
+      :prefecture_id, :delivery_id).merge(user_id: current_user.id)
+    end
+
+  def find_item
+    # ルーティングから商品のidを特定
+    @item = Item.find(params[:id])
   end
 
   def ensure_correct_access
-    @item = Item.find(params[:id])
     redirect_to root_path if current_user.id != @item.user.id || @item.order.present?
   end
 end
