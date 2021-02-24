@@ -20,6 +20,11 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.phone_number = '0123456789'
         expect(@order_shipping).to be_valid
       end
+
+      it 'buildingは空でも購入できる' do
+        @order_shipping.building = nil
+        expect(@order_shipping).to be_valid
+      end
     end
 
     context '商品の購入ができない時' do
