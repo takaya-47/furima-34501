@@ -64,6 +64,18 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("Phone number can't be blank")
       end
 
+      it 'phone_numberが12桁以上では購入できない' do
+        @order_shipping.phone_number = '012345678901'
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it 'phone_numberが英数混合では登録できない' do
+        @order_shipping.phone_number = 'o9012345678'
+        @order_shipping.valid?
+        expect(@order_shipping.errors.full_messages).to include('Phone number is invalid')
+      end
+
       it 'tokenがなければ購入できない' do
         @order_shipping.token = nil
         @order_shipping.valid?
