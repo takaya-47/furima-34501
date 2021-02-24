@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_item
   before_action :ensure_correct_user
   before_action :cannot_buy_soldout_item
 
@@ -44,13 +45,11 @@ class OrdersController < ApplicationController
   end
 
   def ensure_correct_user
-    find_item
     # 自身の出品した商品の購入ページへは遷移できない
     redirect_to root_path if current_user.id == @item.user.id
   end
 
   def cannot_buy_soldout_item
-    find_item
     redirect_to root_path if @item.order.present?
   end
 end
