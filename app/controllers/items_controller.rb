@@ -1,10 +1,8 @@
 class ItemsController < ApplicationController
   # ログインが必要なアクション
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  # 編集や削除は自身が出品した商品のみ行える。
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
-  # 売却済みの商品は編集や削除ができない。
-  before_action :cannot_edit_soldout_item, only: [:edit, :update, :destroy]
+  # 編集や削除は自身が出品した商品で、かつまだ売れていない商品のみ行える。
+  before_action :ensure_correct_access, only: [:edit, :update, :destroy]
 
   def index
     @items = Item.order(created_at: 'DESC').includes(:user)
@@ -51,15 +49,9 @@ class ItemsController < ApplicationController
                                  :prefecture_id, :delivery_id).merge(user_id: current_user.id)
   end
 
-  def ensure_correct_user
-    # ルーティングから変数itemのidを取得する
+  def ensure_correct_access
     @item = Item.find(params[:id])
-    # ログイン中のユーザーのidと、遷移しようとしている商品ページの商品を出品したユーザーのidが一致しなければトップページへ強制的に遷移させる。
-    redirect_to root_path if current_user.id != @item.user.id
+    redirect_to root_path if current_user.id != @item.user.id || @item.order.present?
   end
-
-  def cannot_edit_soldout_item
-    @item = Item.find(params[:id])
-    redirect_to root_path if @item.order.present?
-  end
+  
 end
