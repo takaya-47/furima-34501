@@ -31,7 +31,7 @@ RSpec.describe OrderShipping, type: :model do
       it 'postal_codeがなければ購入できない' do
         @order_shipping.postal_code = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("郵便番号を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('郵便番号を入力してください')
       end
 
       it 'postal_codeはハイフンが必要' do
@@ -49,19 +49,19 @@ RSpec.describe OrderShipping, type: :model do
       it 'cityがなければ購入できない' do
         @order_shipping.city = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("市区町村を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('市区町村を入力してください')
       end
 
       it 'addressがなければ購入できない' do
         @order_shipping.address = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("番地を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('番地を入力してください')
       end
 
       it 'phone_numberがなければ購入できない' do
         @order_shipping.phone_number = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("電話番号を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('電話番号を入力してください')
       end
 
       it 'phone_numberが12桁以上では購入できない' do
@@ -79,19 +79,19 @@ RSpec.describe OrderShipping, type: :model do
       it 'tokenがなければ購入できない' do
         @order_shipping.token = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("カード情報を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('カード情報を入力してください')
       end
 
       it 'user_idがなければ購入できない' do
         @order_shipping.user_id = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("ユーザーを入力してください")
+        expect(@order_shipping.errors.full_messages).to include('ユーザーを入力してください')
       end
 
       it 'item_idがなければ購入できない' do
         @order_shipping.item_id = nil
         @order_shipping.valid?
-        expect(@order_shipping.errors.full_messages).to include("商品を入力してください")
+        expect(@order_shipping.errors.full_messages).to include('商品を入力してください')
       end
     end
   end
