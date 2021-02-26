@@ -72,3 +72,5 @@ gem 'active_hash'
 gem 'payjp'
 # AWSのS3を利用するためのgem
 gem "aws-sdk-s3", require: false
+# アプリケーションの日本語対応用gem
+gem 'rails-i18n'
