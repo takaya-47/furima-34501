@@ -29,3 +29,5 @@ ja:
         building: 建物名
         phone_number: 電話番号
         token: カード情報
+        user_id: ユーザー
+        item_id: 商品
