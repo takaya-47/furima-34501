@@ -15,7 +15,7 @@ class OrderShipping
     validates :item_id
     validates :token
   end
-  validates :prefecture_id, numericality: { other_than: 0, message: 'Select' }
+  validates :prefecture_id, numericality: { other_than: 0, message: 'を選択してください' }
 
   # フォームオブジェクトクラスはActiveRecordを継承していないのでsaveメソッドを自分で記述する必要がある。
   def save
