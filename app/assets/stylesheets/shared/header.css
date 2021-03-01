@@ -46,6 +46,17 @@
   width: 100%;
 }
 
+.search-alert {
+  color: red;
+  font-weight: bold;
+  text-align: right;
+  display: none;
+}
+
+.empty-alert {
+  display: block;
+}
+
 .nav {
   font-size: 18px;
   display: flex;
