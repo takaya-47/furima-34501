@@ -74,3 +74,5 @@ gem 'payjp'
 gem "aws-sdk-s3", require: false
 # アプリケーションの日本語対応用gem
 gem 'rails-i18n'
+# ページネーション実装のためのgem
+gem 'kaminari'
