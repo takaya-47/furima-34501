@@ -2,8 +2,8 @@ class Item < ApplicationRecord
   # モデルとのアソシエーション
   belongs_to :user
   has_one :order
-  # 画像を１枚添付できる
-  has_one_attached :image
+  # 画像を複数枚添付できる
+  has_many_attached :images
 
   # ActiveHashクラスとのアソシエーション定義のためにmoduleを取り込む
   extend ActiveHash::Associations::ActiveRecordExtensions
@@ -14,7 +14,7 @@ class Item < ApplicationRecord
   belongs_to :delivery
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :name
     validates :explain
     validates :price, format: { with: /\A[0-9]+\z/, message: 'は半角数字で入力してください' },
