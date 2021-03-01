@@ -1,14 +1,16 @@
 <%# CSS・・・assets/stylesheets/shared/header.css %>
 <header class='top-page-header'>
-  <div class='search-bar-contents'>
+  <div class='search-bar-contents' id='search-bar-contents'>
     <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <form class="search-form" action="#">
-      <input class='input-box' placeholder='キーワードから探す'>
-      <button class="search-button">
-        <%= image_tag "search.png", class:"search-icon" %>
-      </button>
-    </form>
+
+    <%= form_with url: search_items_path, method: :get, class: "search-form", local: true do |f| %>
+    <%= f.text_field :keyword, placeholder: "キーワードから探す", class: "input-box", id: "search-field" %>
+    <%= f.submit "検索", class: "search-button", id: "search-button" %>
+    <% end %>
   </div>
+
+  <p class='search-alert' id='search-alert'>キーワードを入力してください</p>
+
   <div class='nav'>
     <ul class='lists-left'>
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>

@@ -27,4 +27,17 @@ class Item < ApplicationRecord
       validates :delivery_id
     end
   end
+
+  def self.search(keyword)
+    if keyword != ''
+      Item.where('name LIKE(?)', "%#{keyword}%").desc_order
+    else
+      desc_order
+    end
+  end
+
+  def self.desc_order
+    # 商品は常に最新のものが先頭に来るよう表示する
+    Item.order(created_at: 'DESC').includes(:user)
+  end
 end
