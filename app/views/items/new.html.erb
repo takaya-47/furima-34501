@@ -16,14 +16,19 @@
         出品画像
         <span class="indispensable">必須</span>
       </div>
-      <div class="click-upload">
+      <div class="click-upload" id="upload-box">
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, name: 'item[images][]', id:"item-image" %>
       </div>
     </div>
     <%# /出品画像 %>
+    <%# 出品画像のプレビュー %>
+    <div class="preview-box preview-hidden" id="preview-box">
+      <%# この中にpreview.jsで作成するプレビュー画像を挿入 %>
+    </div>
+    <%# 出品画像のプレビュー %>
     <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">
